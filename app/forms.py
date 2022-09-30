@@ -19,13 +19,13 @@ eti = {'default': next_block(60), 'widget': TimeInput()}
 
 
 class AppointmentForm(FlaskForm):
-    name = StringField("Name", DataRequired)
-    start_date = DateField("Start Date", DataRequired, **di)
-    start_time = DateField("Start Time", DataRequired, **sti)
-    end_date = DateField("End Date", DataRequired, **di)
-    end_time = DateField("End Time", DataRequired, **sti)
-    description = TextAreaField("description", DataRequired)
-    private = BooleanField("Private?", DataRequired)
+    name = StringField("Name", [ DataRequired()])
+    start_date = DateField("Start Date", [ DataRequired()], **di)
+    start_time = DateField("Start Time", [ DataRequired()], **sti)
+    end_date = DateField("End Date", [ DataRequired()], **di)
+    end_time = DateField("End Time", [ DataRequired()], **sti)
+    description = TextAreaField("description", [ DataRequired()])
+    private = BooleanField("Private?", [ DataRequired()])
     submit = SubmitField("Create an appointment")
 
     def validate_end_date(form, field):
