@@ -1,8 +1,10 @@
+from datetime import datetime, timedelta
 from flask_wtf import FlaskForm
-from wtforms.fields import (BooleanField, DateField, StringField,SubmitField,TextAreaField,TimeField)
+from wtforms.fields import (
+    BooleanField, DateField, StringField, SubmitField, TextAreaField, TimeField
+)
 from wtforms.widgets import DateInput, TimeInput
 from wtforms.validators import DataRequired, ValidationError
-from datetime import datetime, timedelta
 
 
 def next_block(delta=0):
@@ -13,19 +15,20 @@ def next_block(delta=0):
     return time
 
 
+v = [DataRequired()]
 di = {'default': datetime.now, 'widget': DateInput()}
 sti = {'default': next_block(), 'widget': TimeInput()}
 eti = {'default': next_block(60), 'widget': TimeInput()}
 
 
 class AppointmentForm(FlaskForm):
-    name = StringField("Name", [ DataRequired()])
-    start_date = DateField("Start Date", [ DataRequired()], **di)
-    start_time = DateField("Start Time", [ DataRequired()], **sti)
-    end_date = DateField("End Date", [ DataRequired()], **di)
-    end_time = DateField("End Time", [ DataRequired()], **sti)
-    description = TextAreaField("description", [ DataRequired()])
-    private = BooleanField("Private?", [ DataRequired()])
+    name = StringField("Name", v)
+    start_date = DateField("Start date", v, **di)
+    start_time = TimeField("Start time", v, **sti)
+    end_date = DateField("End date", v, **di)
+    end_time = TimeField("End time", v, **eti)
+    description = TextAreaField("Description", v)
+    private = BooleanField("Private?")
     submit = SubmitField("Create an appointment")
 
     def validate_end_date(form, field):

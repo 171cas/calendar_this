@@ -8,7 +8,7 @@
 <body>
     <h1>Main Jinja</h1>
     <section id="appointment-form">
-        <form method="post">
+        <form action="" method="post">
             {{ form.csrf_token }}
             <div class="form-row">{{ form.name.label }} {{ form.name }}</div>
             <div class="form-row">{{ form.start_date.label }} {{ form.start_date }}</div>
@@ -27,7 +27,7 @@
             <div class="form-row">{{ form.end_time.label }} {{ form.end_time }}</div>
             <div class="form-row">{{ form.description.label }} {{ form.description }}</div>
             <div class="form-row">{{ form.private.label }} {{ form.private }}</div>
-            <div class="form-actions">{{ form.submit }}</div>
+            <div class="form-actions">{{ form.submit() }}</div>
         </form>
     </section>
     <table>
